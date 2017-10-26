@@ -33,7 +33,7 @@ namespace KP_StringParserClass{
 
 		//First clears myVector
 		//going to search thru pDataToSearchThru, looking for info bracketed by
-		//pStartTag and pEndTag, will add that data to myVector
+		//pStartTag and pEndTag, will add that info only to myVector
 		//returns
 		//SUCCESS  finished searching for data between tags, results in myVector (0 or more entries)
 		//ERROR_TAGS_NULL if either pStart or pEnd is null
