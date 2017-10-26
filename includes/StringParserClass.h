@@ -33,9 +33,9 @@ namespace KP_StringParserClass{
 
 		//First clears myVector
 		//going to search thru pDataToSearchThru, looking for info bracketed by
-		//pStartTag and pEndTag, will add that data to myStrings
+		//pStartTag and pEndTag, will add that data to myVector
 		//returns
-		//SUCCESS  finished searching for data between tags, results in myStrings (0 or more entries)
+		//SUCCESS  finished searching for data between tags, results in myVector (0 or more entries)
 		//ERROR_TAGS_NULL if either pStart or pEnd is null
 		//ERROR_DATA_NULL pDataToSearchThru is null
 		int getDataBetweenTags(char *pDataToSearchThru, std::vector<std::string> &myVector);
