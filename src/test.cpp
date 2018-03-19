@@ -100,46 +100,74 @@ void testStringParser(const std::string &startTag,const std::string &endTag){
 
 	//verify correct null behaviour
 	char* pChar =0;
-	EXPECT_EQ (ERROR_TAGS_NULL, sp.getDataBetweenTags(pChar, mv),"6",FIVE_POINTS);
+	try{
+		EXPECT_EQ (ERROR_TAGS_NULL, sp.getDataBetweenTags(pChar, mv),"6",FIVE_POINTS);
+	} catch (...) {cout<<"Threw exception 10 "<<endl;}
 
 	//verify correct null tag behaviour
-	EXPECT_EQ (ERROR_TAGS_NULL, sp.setTags(0, 0),"7",FIVE_POINTS);
+	try{
+		EXPECT_EQ (ERROR_TAGS_NULL, sp.setTags(0, 0),"7",FIVE_POINTS);
+	} catch (...) {cout<<"Threw exception 10 "<<endl;}
 
 	//set tags
 	String_to_pointer stp_start(startTag);
 	String_to_pointer stp_end(endTag);
 
-	EXPECT_EQ (SUCCESS, sp.setTags(stp_start.getPointerToStringBegginning(), stp_end.getPointerToStringBegginning()),"8",FIVE_POINTS);
+	try{
+		EXPECT_EQ (SUCCESS, sp.setTags(stp_start.getPointerToStringBegginning(), stp_end.getPointerToStringBegginning()),"8",FIVE_POINTS);
+	} catch (...) {cout<<"Threw exception 10 "<<endl;}
 
 	//now that tags are set verify that it fails if there is no data
-	EXPECT_EQ (ERROR_DATA_NULL, sp.getDataBetweenTags(pChar, mv),"9",FIVE_POINTS);
+	try{
+		EXPECT_EQ (ERROR_DATA_NULL, sp.getDataBetweenTags(pChar, mv),"9",FIVE_POINTS);
+	} catch (...) {cout<<"Threw exception 10 "<<endl;}
 
 	//we cant manipulate String contents easily, so make a copy in a dynamically allocated array
 	//incidently this class shows the principles of RAII, allocated memory is automatically
 	//deallocated in the destructor
 	String_to_pointer stp(TEST_STRING);
 	pChar = stp.getPointerToStringBegginning();
-
-	EXPECT_EQ (SUCCESS, sp.getDataBetweenTags(pChar, mv),"10",FIVE_POINTS);
-	EXPECT_EQ (2, mv.size(),"11",FIVE_POINTS);
-	EXPECT_EQ (TS_FIRST_NONCE, mv[0],"12",TWO_POINTS);
-	EXPECT_EQ (TS_SECOND_NONCE, mv[1],"13",THREE_POINTS);
+	
+	try{
+		EXPECT_EQ (SUCCESS, sp.getDataBetweenTags(pChar, mv),"10",FIVE_POINTS);
+	} catch (...) {cout<<"Threw exception 10 "<<endl;}
+	try{
+		EXPECT_EQ (2, mv.size(),"11",FIVE_POINTS);
+	} catch (...) {cout<<"Threw exception 10 "<<endl;}
+	try{
+		EXPECT_EQ (TS_FIRST_NONCE, mv[0],"12",TWO_POINTS);
+	} catch (...) {cout<<"Threw exception 10 "<<endl;}
+	try{
+		EXPECT_EQ (TS_SECOND_NONCE, mv[1],"13",THREE_POINTS);
+	} catch (...) {cout<<"Threw exception 10 "<<endl;}
 
 	//make sure they clear the vector and not append to it
 	pChar = stp.getPointerToStringBegginning();
-	EXPECT_EQ (SUCCESS, sp.getDataBetweenTags(pChar, mv),"14",ZERO_POINTS); //already tested
-	EXPECT_EQ (2, mv.size(),"15",FIVE_POINTS);								//if one then it was cleared if 2 not
+	try{
+		EXPECT_EQ (SUCCESS, sp.getDataBetweenTags(pChar, mv),"14",ZERO_POINTS); //already tested
+	} catch (...) {cout<<"Threw exception 10 "<<endl;}
+
+	try{
+		EXPECT_EQ (2, mv.size(),"15",FIVE_POINTS);								//if one then it was cleared if 2 not
+	} catch (...) {cout<<"Threw exception 10 "<<endl;}
 
 	//try with no end tag
 	stp.changeString(TEST_STRING_NO_END_TAG);
 	pChar = stp.getPointerToStringBegginning();
-	EXPECT_EQ (SUCCESS, sp.getDataBetweenTags(pChar, mv),"16",FIVE_POINTS);
+
+	try{
+		EXPECT_EQ (SUCCESS, sp.getDataBetweenTags(pChar, mv),"16",FIVE_POINTS);
+	} catch (...) {cout<<"Threw exception 10 "<<endl;}
+
 	EXPECT_EQ (0, mv.size(),"17",FIVE_POINTS);
 
 	//try with no start tag
 	stp.changeString(TEST_STRING_NO_START_TAG);
 	pChar = stp.getPointerToStringBegginning();
-	EXPECT_EQ (SUCCESS, sp.getDataBetweenTags(pChar, mv),"18",FIVE_POINTS);
+	try{
+		EXPECT_EQ (SUCCESS, sp.getDataBetweenTags(pChar, mv),"18",FIVE_POINTS);
+	} catch (...) {cout<<"Threw exception 10 "<<endl;}
+		
 	EXPECT_EQ (0, mv.size(),"19",FIVE_POINTS);
 
 	//make sure they made a deep copy of the tags
@@ -152,7 +180,10 @@ void testStringParser(const std::string &startTag,const std::string &endTag){
 	pChar = stp.getPointerToStringBegginning();
 
 	mv.clear();
-	EXPECT_EQ (SUCCESS, sp.getDataBetweenTags(pChar, mv),"20",ZERO_POINTS);	//already tested
+	try{
+		EXPECT_EQ (SUCCESS, sp.getDataBetweenTags(pChar, mv),"20",ZERO_POINTS);	//already tested
+	} catch (...) {cout<<"Threw exception 10 "<<endl;}
+
 	EXPECT_EQ (2, mv.size(),"21",TEN_POINTS);
 }
 
