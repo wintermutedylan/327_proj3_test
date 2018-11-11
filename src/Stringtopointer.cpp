@@ -37,7 +37,6 @@ void String_to_pointer::resetPointer(){
 	if(len>SPACE_FOR_TERMINATING_NULL_CHAR){
 		pChar = new char[len];
 		strncpy(pChar,aString.c_str(),len);
-		*(pChar+len)=0;
 	}
 }
 
